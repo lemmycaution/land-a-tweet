@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def create
-    session[:user] = Identity.find_or_create_by_oauth(request.env['omniauth.auth']).id
+    session[:user] = Donor.find_or_create_by_oauth(request.env['omniauth.auth']).id
     redirect_to root_path, notice: "Signed in!"
   end
 

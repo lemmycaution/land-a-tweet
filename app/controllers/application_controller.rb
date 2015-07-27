@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= session[:user] ? Identity.find_by(id: session[:user]) : nil
+    @current_user ||= session[:user] ? Donor.find_by(id: session[:user]) : nil
   end
 
 end

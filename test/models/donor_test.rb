@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class IdentityTest < ActiveSupport::TestCase
+class DonorTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

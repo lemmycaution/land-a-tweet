@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   delete '/auth/:provider', to: 'sessions#destroy'
   get "/auth/failure", to: "sessions#failure"
 
-  resources :identities, only: [:update]
+  resources :donors, only: [:update]
 end
