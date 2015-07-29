@@ -1,0 +1,23 @@
+<div class="container p2">
+
+  <p>
+    <strong>Broadcasts</strong>
+    <ul>
+      <% @donor.payload['broadcasts'].each do |tweet_id, broadcast| %>
+      <li>
+        <%= broadcast['result'] %> 
+        <%= link_to tweet_id, tweet_path(tweet_id) %> 
+        <a href="https://twitter.com/<%=@donor.payload['info']['nickname'] %>/status/<%= broadcast['tweet_id'] %>">See on Twitter</a>
+      </li>
+      <% end %>
+    </ul>  
+  </p>
+  <p>
+    <strong>Payload:</strong>
+    <pre><%= JSON.pretty_generate @donor.payload %></pre>
+  </p>
+  
+
+  <%= link_to 'Edit', edit_donor_path(@donor), class: 'btn btn-outline' %>
+  <%= link_to 'Back', donors_path, class: 'btn btn-outline' %>  
+</div>

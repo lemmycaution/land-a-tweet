@@ -1,0 +1,37 @@
+<div class="container p2">
+
+  <h1>Listing Tweets</h1>
+  <div class="overflow-scroll mb2">
+    <table class="table-light">
+      <thead>
+        <tr>
+          <th>Text</th>
+          <th>Action</th>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @tweets.each do |tweet| %>
+        <tr>
+          <td><%= tweet.text %></td>
+          <td><%= tweet.action %></td>
+          <td><%= tweet.status %></td>
+          <td><%= link_to 'Show', tweet %></td>
+          <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+          <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="border-top">Total <strong><%= Tweet.count %></strong></td>
+          <td class="border-top">Reached <strong><%= Tweet.reached %></strong></td>
+          <td class="border-top" colspan="4"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <%= link_to 'New Tweet', new_tweet_path, class: 'btn btn-primary' %>
+
+</div>

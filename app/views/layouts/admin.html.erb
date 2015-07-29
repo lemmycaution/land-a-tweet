@@ -10,7 +10,19 @@
 
 <% if flash[:alert] %><p class="m2 p2 white bg-darken-3 rounded fixed right-0 center z2" data-auto-dismiss="5"><%= flash[:alert] %></p><% end %>
 <% if flash[:notice] %><p class="m2 p2 white bg-darken-3 rounded fixed right-0 center z2" data-auto-dismiss="5"><%= flash[:notice] %></p><% end %>
-  
+
+<% if current_admin_user %>
+<nav class="clearfix white bg-green">
+  <div class="sm-col">
+    <a href="/admin/donors" class="btn py2">Donors</a>
+    <a href="/admin/tweets" class="btn py2">Tweets</a>
+  </div>
+  <div class="sm-col-right">
+    <%= link_to 'Sign out', destroy_admin_user_session_path, method: :delete, class: 'btn py2' %>
+  </div>
+</nav>
+<% end %>
+
 <%= yield %>
 
 </body>

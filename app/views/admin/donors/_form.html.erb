@@ -1,0 +1,21 @@
+<%= form_for(@donor, html: {class: 'clearfix col-12 mx-auto left-align mb2'}) do |f| %>
+  <% if @donor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@donor.errors.count, "error") %> prohibited this donor from being saved:</h2>
+
+      <ul>
+      <% @donor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <%= f.label :payload %>
+    <%= f.text_area :payload, class: 'block col-12 mb2 field', value: @donor.persisted? ? JSON.pretty_generate(@donor.payload) : nil %>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
