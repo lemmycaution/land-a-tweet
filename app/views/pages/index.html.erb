@@ -22,7 +22,7 @@
     <h1 class="h1 h0-responsive caps mt4 mb2 regular">Thank you for your help!</h1>
     <div class="col-8 mx-auto">
       <p class="h3">That's great to see you on board, you have currently <span class="bold inline-block px1 white bg-green rounded" data-donations><%= current_user.donations %></span> tweets donated, to change that put desired  number below and click `Donate!` button.</p>
-      <%= form_for current_user, method: :put, remote: true, html: {class: 'clearfix'} do |f| %>
+      <%= form_for current_user, url: donation_path(current_user.id), method: :put, remote: true, html: {class: 'clearfix'} do |f| %>
         <label class="hide">Tweet count</label>
         <input name="donor[donations]" type="number" min="1" step="1" value="<%= current_user.donations %>" class="col col-6 md-col-9 field rounded-left x-group-item center" placeholder="Tweet count" data-donations>
         <button type="submit" class="col col-6 md-col-3 btn btn-primary bg-green rounded-right">Donate!</button>

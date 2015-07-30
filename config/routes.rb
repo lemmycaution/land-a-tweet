@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :donations, only: [:update]
 
   scope 'admin', module: 'admin' do
     resources :donors
@@ -15,5 +16,5 @@ Rails.application.routes.draw do
   delete '/auth/:provider', to: 'sessions#destroy'
   get "/auth/failure", to: "sessions#failure"
 
-  resources :donations, only: [:update]
+
 end
