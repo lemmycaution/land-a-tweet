@@ -16,6 +16,10 @@
 //= require_tree .
 
 $(document).on('page:change', function() {
+  function toggleForm() {
+    $(this).toggleClass('hide')
+    $('form.donations').toggleClass('hide')
+  }
   $('[data-auto-dismiss]').each(function (i, el) {
     var $el = $(el)
     setTimeout(function () { 
@@ -30,6 +34,7 @@ $(document).on('page:change', function() {
   })
   .on('ajax:success', function(e, data, status, xhr) {
     $('[data-donations]').text(data)
+    toggleForm.call($('.btn-toggle-donations-form')[0])
   })
   .on("ajax:error", function(e, xhr, status, error) {
     var errors = '<ul class="list-reset mb2 p2 bg-red white rounded errors">'
@@ -39,4 +44,5 @@ $(document).on('page:change', function() {
     errors += '</ul>'
     $(errors).insertBefore($(e.currentTarget))
   })
+  $('.btn-toggle-donations-form').click(toggleForm)
 })

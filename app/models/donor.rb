@@ -1,5 +1,5 @@
 class Donor < ActiveRecord::Base
-  validates :donations, numericality: { only_integer: true, greater_than: 0 }, on: :update
+  # validates :donations, numericality: { only_integer: true, greater_than: 0 }, on: :update
   
   def self.find_or_create_by_oauth auth_hash
     self.find_for_oauth(auth_hash) || self.create!(payload: auth_hash.merge({broadcasts: {}, donations: 0}))

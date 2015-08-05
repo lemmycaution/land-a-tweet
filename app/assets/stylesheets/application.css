@@ -14,6 +14,8 @@
  *= require_self
  */
 
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800);
+
 .bg-blue-grad{
   background: -webkit-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* Chrome 10+, Saf5.1+ */
   background:    -moz-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* FF3.6+ */
@@ -26,4 +28,10 @@
   padding: 1em;
   border-radius: 3px;
   color: white;
+}
+h1,h2,h3,h4,h5,h6
+.h1,.h2,.h3,.h4,.h5,.h6
+{
+  font-family: 'Merriweather Sans', sans-serif;
+  font-weight: 800 !important;
 }
