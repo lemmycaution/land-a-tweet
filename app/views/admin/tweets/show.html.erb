@@ -23,7 +23,7 @@
     <%= f.number_field :limit, class: 'field block col-12 sm-col-1', value: @donors.count, max: @donors.count, min: 1 %> 
     
     <%= f.label 'donors' %>  
-    <%= f.select :donor_ids, @donors.collect{ |u| [u.name, u.id] }, {}, {multiple: true, class: 'field block col-12 sm-col-3'} %>
+    <%= f.select :donor_ids, @donors.by_action(@tweet.action).collect{ |u| [u.name, u.id] }, {}, {multiple: true, class: 'field block col-12 sm-col-3'} %>
     
     <%= f.label 'donations greater than' %>
     <%= f.number_field :donations_greater_than, class: 'field block col-12 sm-col-1', value: 1, min: 1 %>

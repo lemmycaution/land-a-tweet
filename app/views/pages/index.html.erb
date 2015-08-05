@@ -25,6 +25,7 @@
       <%= form_for current_user, url: donation_path(current_user.id), method: :put, remote: true, html: {class: "clearfix donations #{hide_class}" } do |f| %>
         <label class="hide">Tweet count</label>
         <input name="donor[donations]" type="number" min="0" step="1" value="<%= current_user.donations %>" class="col col-6 md-col-9 field rounded-left x-group-item center" placeholder="Tweet count" data-donations>
+        <input type="hidden" name="donor[action]" value="<%= action_param %>">
         <button type="submit" class="col col-6 md-col-3 btn btn-primary bg-green rounded-right">Donate!</button>
       <% end %>
       <button class="<%= hide_class(true) %> btn btn-primary btn-toggle-donations-form">Change my preferences</button>

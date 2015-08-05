@@ -3,4 +3,8 @@ module ApplicationHelper
     return unless current_user
     is_button && current_user.donations == 0 || !is_button && current_user.donations > 0 ? "hide" : nil
   end
+  # TODO: sanitize this
+  def action_param
+    params[:action_name]
+  end
 end
