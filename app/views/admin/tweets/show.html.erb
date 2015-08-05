@@ -18,14 +18,14 @@
   <%= link_to 'Back', tweets_path, class: 'btn btn-outline' %>  
 
   <h3>Broadcast</h3>
-  <%= form_for :broadcast, url: broadcast_tweet_path(@tweet), method: :post, remote: true do |f| %>
+  <%= form_for :broadcast, url: broadcast_tweet_path(@tweet), method: :post do |f| %>
     <%= f.label 'number of tweets' %>
     <%= f.number_field :limit, class: 'field block col-12 sm-col-1', value: @donors.count, max: @donors.count, min: 1 %> 
     
     <%= f.label 'donors' %>  
     <%= f.select :donor_ids, @donors.by_action(@tweet.action).collect{ |u| [u.name, u.id] }, {}, {multiple: true, class: 'field block col-12 sm-col-3'} %>
     
-    <%= f.label 'donations greater than' %>
+    <%= f.label 'donations equal and greater than' %>
     <%= f.number_field :donations_greater_than, class: 'field block col-12 sm-col-1', value: 1, min: 1 %>
 
     <%= f.submit "Broadcast!", class: 'btn btn-primary mt2' %>
