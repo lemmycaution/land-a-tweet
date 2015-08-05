@@ -65,7 +65,7 @@ class Admin::TweetsController < Admin::BaseController
   # POST /tweets/1/broadcast
   # POST /tweets/1/broadcast
   def broadcast
-    @tweet.broadcast params[:options]
+    @tweet.broadcast params[:broadcast]
     respond_to do |format|
       format.html { redirect_to tweets_url, notice: 'Tweet was successfully scheduled for broadcasting.' }
       format.json { head :no_content }

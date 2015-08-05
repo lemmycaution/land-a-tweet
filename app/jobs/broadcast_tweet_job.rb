@@ -4,12 +4,12 @@ class BroadcastTweetJob < ActiveJob::Base
   def perform(tweet, options = {})
     options ||= {}
     donors = Donor.not_broadcasters_of(tweet.id)
-    donors = donors.has_donation_equal_or_greater_than(options[:donations_greater_than] || 1)
+    donors = donors.has_donation_equal_or_greater_than(options[:donations_greater_than].to_i || 1)
     if options[:donor_ids]
       options[:donor_ids] = options[:donor_ids].compact.uniq
       donors = donors.where(id: options[:donor_ids]) unless options[:donor_ids].empty?
     end
-    donors = donors.limit(options[:limit]) if options[:limit]
+    donors = donors.limit(options[:limit].to_i) if options[:limit]
     donors = donors.order(:created_at)
     donors.find_each do |donor|
       tweet_id = nil
