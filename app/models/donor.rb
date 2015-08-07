@@ -7,25 +7,25 @@ class Donor < ActiveRecord::Base
     self.find_for_oauth(auth_hash) || self.create!(payload: auth_hash.merge({broadcasts: {}, donations: 0, actions: []}))
   end
   def self.find_for_oauth auth
-    self.find_by("payload->>'provider' = ? AND payload->>'uid' = ?", auth[:provider], auth[:uid])
+    self.find_by("payload ->> 'provider' = ? AND payload ->> 'uid' = ?", auth[:provider], auth[:uid])
   end
   def self.has_donation_equal_or_greater_than num
-    self.where("(payload->>'donations')::int >= ?", num)
+    self.where("(payload ->> 'donations')::int >= ?", num)
   end
   def self.broadcasters
-    self.where("(payload->'broadcasts'->>?) != ?", '{}')
+    self.where("(payload -> 'broadcasts' ->> ?) != ?", '{}')
   end
   def self.broadcasters_of tweet_id
-    self.where("payload->'broadcasts'->?->>'result' = ?", tweet_id, 'OK')
+    self.where("payload->'broadcasts' -> ? ->> 'result' = ?", tweet_id, 'OK')
   end
   def self.not_broadcasters_of tweet_id
-    self.where("(payload->'broadcasts'->?) IS NULL OR payload->'broadcasts'->?->>'result' != ?", tweet_id, tweet_id, 'OK')
+    self.where("(payload -> 'broadcasts' -> ?) IS NULL OR (payload -> 'broadcasts' -> ? ->> 'result') != ?", tweet_id, tweet_id, 'OK')
   end
   def self.available_donations_count
-    self.has_donation_equal_or_greater_than(1).pluck("(payload->>'donations')::int").sum()
+    self.has_donation_equal_or_greater_than(1).pluck("(payload ->> 'donations')::int").sum()
   end
   def self.by_action action
-    self.all
+    self.where(["payload->'actions' ? :action", action: action])
   end
   
   def name

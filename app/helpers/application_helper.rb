@@ -5,6 +5,6 @@ module ApplicationHelper
   end
   # TODO: sanitize this
   def action_param
-    params[:action_name]
+    params[:actionname]
   end
 end

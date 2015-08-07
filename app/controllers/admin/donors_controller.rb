@@ -70,6 +70,6 @@ class Admin::DonorsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def donor_params
-      params[:donor]
+      params.require(:donor).permit(:payload)
     end
 end
