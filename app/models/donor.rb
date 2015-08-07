@@ -37,6 +37,9 @@ class Donor < ActiveRecord::Base
   def donations= val
     payload['donations'] = val.to_i
   end
+  def used_donations_count
+    payload['broadcasts'].map{ |k,v| v['tweet_id'] }.compact.size
+  end
   def token
     payload.try(:[],'credentials').try(:[], 'token')
   end

@@ -7,6 +7,7 @@
         <tr>
           <th>Text</th>
           <th>Action</th>
+          <th>Status</th>
           <th colspan="4"></th>
         </tr>
       </thead>
@@ -18,7 +19,7 @@
           <td><%= tweet.action %></td>
           <td><%= tweet.status %></td>
           <td><%= link_to 'Show', tweet %></td>
-          <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+          <td><%= link_to_if !tweet.sent?, 'Edit', edit_tweet_path(tweet) %></td>
           <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% end %>

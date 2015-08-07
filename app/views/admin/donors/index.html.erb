@@ -7,7 +7,8 @@
         <tr>
           <th>Name</th>
           <th>Donations</th>
-          <th colspan="3"></th>
+          <th>Donations Used</th>
+          <th colspan="2"></th>
         </tr>
       </thead>
 
@@ -17,6 +18,7 @@
         <tr>
           <td><%= donor.name %></td>
           <td><%= donor.donations %></td>
+          <td><%= donor.used_donations_count %></td>
           <td><%= link_to 'Show', donor %></td>
           <td><%= link_to 'Edit', edit_donor_path(donor) %></td>
           <td><%= link_to 'Destroy', donor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
