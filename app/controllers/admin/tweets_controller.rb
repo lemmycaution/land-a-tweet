@@ -80,6 +80,6 @@ class Admin::TweetsController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tweet_params
-      params.require(:tweet).permit(:text, :action)
+      params.require(:tweet).permit(:text, :action, :image, :remove_image, :remote_image_url)
     end
 end

@@ -1,5 +1,11 @@
 <div class="container p2">
 
+  <% if @tweet.image.present? %>
+  <p>
+    <%= image_tag attachment_url(@tweet, :image, :fill, 300, 300, format: "jpg") %>
+  </p>
+  <% end %>
+
   <p>
     <strong>Text:</strong>
     <%= @tweet.text %>
@@ -14,6 +20,7 @@
     <strong>Status:</strong>
     <%= @tweet.status %>
   </p>
+  
   <%= link_to 'Edit', edit_tweet_path(@tweet), class: 'btn btn-outline' %>
   <%= link_to 'Back', tweets_path, class: 'btn btn-outline' %>  
 

@@ -1,3 +1,4 @@
+require 'tempfile'
 class BroadcastTweetJob < ActiveJob::Base
   queue_as :default
 
@@ -24,8 +25,11 @@ class BroadcastTweetJob < ActiveJob::Base
               config.access_token        = donor.token
               config.access_token_secret = donor.secret
             end
-      
-            tweet_id = client.update(tweet.text).try(:id)
+
+            tweet_id = tweet.image.present? ? 
+              client.update_with_media(tweet.text, tweet.image.download).try(:id) :
+              client.update(tweet.text).try(:id)
+
             result = 'OK'
             donor.donations -= 1
           rescue Exception => e

@@ -49,3 +49,8 @@ gem 'omniauth-twitter'
 gem 'devise'
 gem 'delayed_job_active_record'
 gem 'rails_12factor'
+
+gem 'mini_magick'
+gem 'refile', require: 'refile/rails'
+gem 'refile-mini_magick'
+gem 'refile-postgres'

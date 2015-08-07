@@ -6,8 +6,10 @@
       <% @donor.payload['broadcasts'].each do |tweet_id, broadcast| %>
       <li>
         <%= broadcast['result'] %> 
-        <%= link_to tweet_id, tweet_path(tweet_id) %> 
-        <a href="https://twitter.com/<%=@donor.payload['info']['nickname'] %>/status/<%= broadcast['tweet_id'] %>">See on Twitter</a>
+        <%= link_to tweet_id, tweet_path(tweet_id) %>
+        <% if broadcast['tweet_id'] %>
+          <a href="https://twitter.com/<%=@donor.payload['info']['nickname'] %>/status/<%= broadcast['tweet_id'] %>">See on Twitter</a>
+        <% end %>
       </li>
       <% end %>
     </ul>  

@@ -2,6 +2,7 @@ class Tweet < ActiveRecord::Base
   IDLE = 'idle'
 
   validates_presence_of :text, :action
+  attachment :image
 
   def self.reached
     Tweet.all.pluck('id').map{ |tweet_id|

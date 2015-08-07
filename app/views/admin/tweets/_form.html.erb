@@ -14,10 +14,22 @@
 
 
     <%= f.label :text %>
-    <%= f.text_area :text, class: 'block col-12 mb2 field' %>
+    <%= f.text_area :text, class: 'block col-12 mb2 field', maxlength: 140 %>
 
     <%= f.label :action %>
     <%= f.text_field :action, class: 'block col-12 mb2 field' %>
+
+    <%= f.label :image, "Upload an image" %>
+    <%= f.attachment_field :image, class: 'block col-12 mb2 field' %>
+    
+    <%= f.label :remote_image_url, "Or specify URL of the image" %>
+    <%= f.text_field :remote_image_url, class: 'block col-12 mb2 field' %>
+
+    <% if @tweet.persisted? && @tweet.image.present? %>
+    <%= image_tag attachment_url(@tweet, :image, :fill, 300, 300, format: "jpg") %>
+    <%= f.check_box :remove_image %>
+    <%= f.label :remove_image %>
+    <% end %>
 
   <div class="actions">
     <%= f.submit class: 'btn btn-primary' %>
