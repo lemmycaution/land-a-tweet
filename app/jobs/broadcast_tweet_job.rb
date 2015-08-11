@@ -42,6 +42,6 @@ class BroadcastTweetJob < ActiveJob::Base
         client.destroy_tweet tweet_id if tweet_id
       end
     end
-    tweet.update(status: Donor.broadcasters_of(tweet.id).count == reached ? reached.to_s : Tweet::PARTLY_SENT)
+    tweet.update(status: Donor.broadcasters_of(tweet.id).count == reached ? "#{Tweet::SENT} [#{reached.to_s}]"  : Tweet::PARTLY_SENT)
   end
 end
