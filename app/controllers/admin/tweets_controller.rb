@@ -1,5 +1,5 @@
 class Admin::TweetsController < Admin::BaseController
-  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :broadcast]
+  before_action :set_tweet, only: [:show, :edit, :update, :destroy, :broadcast, :count_broadcast]
 
   # GET /tweets
   # GET /tweets.json
@@ -62,6 +62,16 @@ class Admin::TweetsController < Admin::BaseController
     end
   end
   
+  # GET /tweets/1/broadcast
+  # GET /tweets/1/broadcast
+  def count_broadcast
+    donors = Donor.for_broadcasting @tweet, params[:broadcast]
+    respond_to do |format|
+      format.html { redirect_to tweet_url(@tweet) }
+      format.json { render(json: {donors_count: donors.count}) }
+    end
+  end
+
   # POST /tweets/1/broadcast
   # POST /tweets/1/broadcast
   def broadcast

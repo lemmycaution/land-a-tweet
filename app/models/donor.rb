@@ -27,6 +27,17 @@ class Donor < ActiveRecord::Base
   def self.by_action action
     self.where(["payload->'actions' ? :action", action: action])
   end
+  def self.for_broadcasting tweet, options
+    return 0 unless tweet.present?
+    donors = self.by_action(tweet.action).not_broadcasters_of(tweet.id)
+    donors = donors.has_donation_equal_or_greater_than([options[:donations_greater_than].to_i, 1].max)
+    if options[:donor_ids] && (options[:donor_ids] = options[:donor_ids].reject{|e| e.blank? }.compact.uniq).any?
+      donors = donors.where(id: options[:donor_ids])
+    end
+    donors = donors.limit(options[:limit].to_i) if options[:limit]
+    donors = donors.order(:created_at)
+    donors
+  end
   
   def name
     payload['info']['name']

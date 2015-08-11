@@ -28,7 +28,7 @@
     <h3>Broadcast</h3>
     <% # TODO: show how many tweet has been tweeted after %>
     <% # TODO: add a filter/indicator to show how many donors will tweet by donations_greater_than option %>
-    <%= form_for :broadcast, url: broadcast_tweet_path(@tweet), method: :post do |f| %>
+    <%= form_for :broadcast, url: broadcast_tweet_path(@tweet), method: :post, html: {class: 'broadcast'} do |f| %>
       <%= f.label 'number of tweets' %>
       <%= f.number_field :limit, class: 'field block col-12 sm-col-1', value: max_tweet_donor_count, max: max_tweet_donor_count, min: 1 %> 
     
@@ -38,7 +38,7 @@
       <%= f.label 'donations equal and greater than' %>
       <%= f.number_field :donations_greater_than, class: 'field block col-12 sm-col-1', value: 1, min: 1 %>
 
-      <%= f.submit "Broadcast!", class: 'btn btn-primary mt2' %>
+      <%= f.submit "Broadcast! 0", class: 'btn btn-primary mt2' %>
     <% end %>
   <% end %>  
 </div>

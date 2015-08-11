@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   scope 'admin', module: 'admin' do
     resources :donors
     resources :tweets do
-      post :broadcast, on: :member
+      get :broadcast, to: 'tweets#count_broadcast', on: :member
+      post :broadcast, to: 'tweets#broadcast', on: :member
     end
   end
   devise_for :admin_users, path: 'admin'

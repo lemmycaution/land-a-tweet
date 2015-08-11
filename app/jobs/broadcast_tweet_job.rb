@@ -5,21 +5,7 @@ class BroadcastTweetJob < ActiveJob::Base
   def perform(tweet, options = {})
     tweet.update(status: Tweet::SENDING)
     options ||= {}
-    donors = Donor.by_action(tweet.action).not_broadcasters_of(tweet.id)
-    puts "D0 #{donors.count}"
-    Rails.logger.debug "D0 #{donors.count}"
-    donors = donors.has_donation_equal_or_greater_than([options[:donations_greater_than].to_i, 1].max)
-    puts "D1 #{donors.count}"
-    Rails.logger.debug "D1 #{donors.count}"
-    if options[:donor_ids] && (options[:donor_ids] = options[:donor_ids].reject{|e| e.blank? }.compact.uniq).any?
-      donors = donors.where(id: options[:donor_ids])
-      puts "D2 #{donors.count} ids: #{options[:donor_ids]}"
-      Rails.logger.debug "D2 #{donors.count} ids:options[:donor_ids]"
-    end
-    donors = donors.limit(options[:limit].to_i) if options[:limit]
-    puts "D3 #{donors.count}"
-    Rails.logger.debug "D3 #{donors.count}"
-    donors = donors.order(:created_at)
+    donors = Donor.for_broadcasting(tweet, options)
     reached = 0
     return tweet.update(status: Tweet::IDLE) if donors.empty?
     donors.find_each do |donor|
@@ -56,6 +42,6 @@ class BroadcastTweetJob < ActiveJob::Base
         client.destroy_tweet tweet_id if tweet_id
       end
     end
-    tweet.update(status: Donor.broadcasters_of(tweet.id).count == reached ? Tweet::SENT : Tweet::PARTLY_SENT)
+    tweet.update(status: Donor.broadcasters_of(tweet.id).count == reached ? reached.to_s : Tweet::PARTLY_SENT)
   end
 end
