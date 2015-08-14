@@ -1,0 +1,11 @@
+<div class="container p2">
+
+  <h1 class="red">Panic!</h1>
+    
+  <% if jobs_running? %>  
+  <%= link_to 'Stop Jobs', panic_jobs_stop_path, method: :delete, prompt: 'Are you sure?', class: 'btn btn-primary btn-red' %>
+  <% else %>
+  <%= link_to 'Start Jobs', panic_jobs_start_path, method: :post, prompt: 'Are you sure?', class: 'btn btn-primary btn-red' %>
+  <% end %>
+
+</div>
