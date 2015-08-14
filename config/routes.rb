@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       get :broadcast, to: 'tweets#count_broadcast', on: :member
       post :broadcast, to: 'tweets#broadcast', on: :member
     end
+    get 'panic', to: 'panic#index'
+    delete 'panic/jobs/stop', to: 'panic#stop_dj'
+    post 'panic/jobs/start', to: 'panic#start_dj'
+    delete 'panic/donors', to: 'panic#delete_all_donors'
+    put 'panic/frontend/suspend', to: 'panic#suspend_frontend'
+    put 'panic/frontend/activate', to: 'panic#activate_frontend'
   end
   devise_for :admin_users, path: 'admin'
   get 'admin', to: 'admin/tweets#index', as: 'admin_root'
@@ -16,6 +22,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/auth/:provider', to: 'sessions#destroy'
   get "/auth/failure", to: "sessions#failure"
+  get "/auth/check", to: "sessions#check"
 
 
 end

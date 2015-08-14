@@ -13,25 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 
 $(document).on('page:change', function() {
   function toggleForm() {
     $(this).toggleClass('hide')
     $('form.donations').toggleClass('hide')
   }
-  function updateCounts () {
-    var $submitBtn = $('form.broadcast input[type=submit]')
-    $submitBtn.attr('disabled', true)
-    $.getJSON($('form.broadcast').attr('action') + '?' + $('form.broadcast').serialize())
-    .then(function (resp) {
-      $submitBtn.val('Broadcast! ' + resp['donors_count'])
-      $submitBtn.removeAttr('disabled')
-    })
-    .fail(function () {
-      $submitBtn.removeAttr('disabled')
-    })
-  }
+
   $('[data-auto-dismiss]').each(function (i, el) {
     var $el = $(el)
     setTimeout(function () { 
@@ -58,7 +46,18 @@ $(document).on('page:change', function() {
   })
   $('.btn-toggle-donations-form').click(toggleForm)
 
-  if ($('form.broadcast').length > 0) {
-    $('#broadcast_limit, #broadcast_donor_ids, #broadcast_donations_greater_than').change(updateCounts)
+  var $loginLink = $('.btn-login')
+  if ($loginLink.length > 0) {
+    $loginLink.click(function (e) {
+      e.preventDefault()
+      var checkInt = setInterval(function () {
+        $.get('/auth/check').then(function () {
+          clearInterval(checkInt)
+          window.location.reload()
+        })
+      },1000)
+      window.open(e.currentTarget.getAttribute('href'), '_blank')
+    })
   }
+  
 })

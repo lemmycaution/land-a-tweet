@@ -9,8 +9,10 @@ module ApplicationHelper
   def max_tweet_donor_count
     tweet_donors.count
   end
-  # TODO: sanitize this
   def action_param
     sanitize params[:actionname].try(:gsub, /javascript\:|\(|\)|\;|\'/, '')
+  end
+  def jobs_running
+    `bin/delayed_job status`.include? 'running'
   end
 end
