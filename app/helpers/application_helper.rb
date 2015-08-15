@@ -12,7 +12,4 @@ module ApplicationHelper
   def action_param
     sanitize params[:actionname].try(:gsub, /javascript\:|\(|\)|\;|\'/, '')
   end
-  def jobs_running
-    `bin/delayed_job status`.include? 'running'
-  end
 end

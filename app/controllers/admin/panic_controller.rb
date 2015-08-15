@@ -3,26 +3,27 @@ class Admin::PanicController < Admin::BaseController
   end
 
   def stop_dj
-    `bundle exec bin/delayed_job stop`
-    render nothing: true, status: $?.exitstatus === 0 ? 200 : 500
+    Rails.logger.error "panic:stop_dj"
+    redirect_to admin_root_path
   end
 
   def start_dj
-    `bundle exec bin/delayed_job stop`
-    render nothing: true, status: $?.exitstatus === 0 ? 200 : 500
+    Rails.logger.error "panic:start_dj"
+    redirect_to admin_root_path
   end
 
   def delete_all_donors
     Donor.delete_all
-    redirect_to admin_root
+    redirect_to admin_root_path
   end
 
   def suspend_frontend
-    `mv #{Rails.app.root}/public/index.html.suspend #{Rails.app.root}/public/index.html`
-    
+    `mv #{Rails.application.root}/public/index.html.suspend #{Rails.application.root}/public/index.html`
+    redirect_to admin_root_path
   end
 
   def activate_frontend
-    `mv #{Rails.app.root}/public/index.html #{Rails.app.root}/public/index.html.suspend`
+    `mv #{Rails.application.root}/public/index.html #{Rails.application.root}/public/index.html.suspend`
+    redirect_to admin_root_path
   end
 end

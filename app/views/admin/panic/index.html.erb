@@ -2,10 +2,14 @@
 
   <h1 class="red">Panic!</h1>
     
-  <% if jobs_running? %>  
-  <%= link_to 'Stop Jobs', panic_jobs_stop_path, method: :delete, prompt: 'Are you sure?', class: 'btn btn-primary btn-red' %>
-  <% else %>
-  <%= link_to 'Start Jobs', panic_jobs_start_path, method: :post, prompt: 'Are you sure?', class: 'btn btn-primary btn-red' %>
-  <% end %>
 
+  <%= link_to 'Stop Jobs', panic_jobs_stop_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary inline-block m2 bg-red' %>
+
+  <%= link_to 'Start Jobs', panic_jobs_start_path, method: :post, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary inline-block m2 bg-green' %>
+
+  <%= link_to 'Delete all donors', panic_donors_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary inline-block m2 bg-red' %>
+
+  <%= link_to 'Suspend frontend', panic_frontend_suspend_path, method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary inline-block m2 bg-red' %>
+
+  <%= link_to 'Activate frontend', panic_frontend_activate_path, method: :put, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary inline-block m2 bg-green' %>
 </div>
