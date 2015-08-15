@@ -3,7 +3,7 @@
 <head>
   <title>Lend a Tweet</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -16,6 +16,7 @@
   <div class="sm-col">
     <a href="/admin/donors" class="btn py2">Donors</a>
     <a href="/admin/tweets" class="btn py2">Tweets</a>
+    <a href="/admin/panic" class="btn py2">Panic</a>
   </div>
   <div class="sm-col-right">
     <%= link_to 'Sign out', destroy_admin_user_session_path, method: :delete, class: 'btn py2' %>
