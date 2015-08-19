@@ -27,5 +27,6 @@ $(document).on('page:change', function() {
   }
   if ($('form.broadcast').length > 0) {
     $('#broadcast_limit, #broadcast_donor_ids, #broadcast_donations_greater_than').change(updateCounts)
+    updateCounts()
   }
 })
