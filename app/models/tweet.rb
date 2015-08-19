@@ -14,7 +14,7 @@ class Tweet < ActiveRecord::Base
   end
   
   def self.sent_for_action action
-    self.where(action: action, status: SENT)
+    self.where(action: action).where("status like ?", "#{SENT}%")
   end
   
   def status
