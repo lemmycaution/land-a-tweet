@@ -13,6 +13,10 @@ class Tweet < ActiveRecord::Base
     }.sum()
   end
   
+  def self.sent_for_action action
+    self.where(action: action, status: SENT)
+  end
+  
   def status
     read_attribute(:status) || IDLE
   end

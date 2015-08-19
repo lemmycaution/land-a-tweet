@@ -2,6 +2,7 @@ class Donor < ActiveRecord::Base
   # validates :donations, numericality: { only_integer: true, greater_than: 0 }, on: :update
   attr_accessor :action
   before_save :set_action
+  after_save :update_tweet_statuses, if: 'donations > 0 && actions.try(:any?)'
   
   def self.find_or_create_by_oauth auth_hash
     self.find_for_oauth(auth_hash) || self.create!(payload: auth_hash.merge({broadcasts: {}, donations: 0, actions: []}))
@@ -48,6 +49,9 @@ class Donor < ActiveRecord::Base
   def donations= val
     payload['donations'] = val.to_i
   end
+  def actions
+    payload['actions'].to_a.compact.reject{|a| a.blank?}
+  end
   def used_donations_count
     payload['broadcasts'].map{ |k,v| v['tweet_id'] }.compact.size
   end
@@ -62,5 +66,11 @@ class Donor < ActiveRecord::Base
   
   def set_action
     payload['actions'] << action if action
+  end
+  
+  def update_tweet_statuses
+    actions.each do |action|
+      Tweet.sent_for_action(action).update_all(status: Tweet::PARTLY_SENT) if payload['actions']
+    end
   end
 end
