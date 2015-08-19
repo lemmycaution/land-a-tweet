@@ -23,7 +23,7 @@ class Tweet < ActiveRecord::Base
   
   [IDLE, SENDING, PARTLY_SENT, SENT].each do |status_name|
     define_method "#{status_name}?" do
-      status == status_name
+      status.start_with? status_name
     end
     
   end
