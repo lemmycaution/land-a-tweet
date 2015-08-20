@@ -54,5 +54,8 @@ gem 'rails_12factor'
 gem 'mini_magick'
 gem 'refile', require: 'refile/rails'
 gem 'refile-mini_magick'
-gem 'refile-postgres'
+gem "refile-s3"
+gem "aws-sdk"
+gem "fog"
+gem "asset_sync"
 gem 'daemons'

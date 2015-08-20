@@ -30,6 +30,12 @@ class BroadcastTweetJob < ActiveJob::Base
             donor.donations -= 1
             reached += 1
           rescue Exception => e
+            # TODO: make it DRY
+            if tweet_id
+              client.destroy_tweet tweet_id 
+              donor.donations += 1
+              reached -= 1
+            end
             result = e.message
           end
         end
@@ -39,9 +45,15 @@ class BroadcastTweetJob < ActiveJob::Base
       rescue Exception => e
         Rails.logger.error e.message
         puts e.message
-        client.destroy_tweet tweet_id if tweet_id
+        # TODO: make it DRY
+        if tweet_id
+          client.destroy_tweet tweet_id 
+          donor.donations += 1
+          reached -= 1
+        end
       end
     end
     tweet.update(status: Donor.broadcasters_of(tweet.id).count == reached ? "#{Tweet::SENT} [#{reached.to_s}]"  : Tweet::PARTLY_SENT)
   end
+
 end
