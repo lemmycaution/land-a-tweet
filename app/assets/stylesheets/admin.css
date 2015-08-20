@@ -10,7 +10,22 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require iframestyles
+ *= require bass
  *= require animate
  *= require_self
  */
+
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800);
+
+#error_explanation{
+  background: red;
+  padding: 1em;
+  border-radius: 3px;
+  color: white;
+}
+h1,h2,h3,h4,h5,h6
+.h1,.h2,.h3,.h4,.h5,.h6
+{
+  font-family: 'Merriweather Sans', sans-serif;
+  font-weight: 800 !important;
+}
