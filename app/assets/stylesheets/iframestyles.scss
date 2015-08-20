@@ -1,0 +1,178 @@
+/* Imports */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+
+
+/* Variables */
+
+$sans_serif: 'Open sans', sans-serif;
+$doc_font_size: 16px;
+$normal: 400;
+$bold: 700;
+
+$primary_color: #ec4a4a;
+$tw_blue: #00abf0;
+
+$small_button_height: 40px;
+$button_height: 48px;
+
+
+/* Mixins */
+
+@mixin fixed-input-height() {
+	display: block;
+	width: 100%;
+	font-size: 13px;
+	height: $small_button_height;
+	line-height: $small_button_height;
+
+	@media screen and (min-width: 600px) {
+		display: inline-block;
+		width: auto;
+		height: $button_height;
+		font-size: $doc_font_size;
+		line-height: $button_height;
+	}
+}
+
+@mixin btn($color: #fff, $background: $primary_color) {
+	@include fixed-input-height();
+
+	padding: 0 14px;
+	font-size: 13px;
+	font-weight: $bold;
+	color: $color;
+	text-align: center;
+	text-decoration: none;
+	background: $background;
+	border: none;
+	cursor: pointer;
+	vertical-align: top;
+	transition: .1s background ease;
+
+	&:hover {
+		background: lighten($background, 20%);
+	}
+
+	@media screen and (min-width: 600px) {
+		font-size: $doc_font_size;
+	}
+}
+
+
+
+/* Basic reset */
+
+* {
+	margin: 0;
+	padding: 0;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+/* Core elements */
+
+body {
+	font-size: $doc_font_size;
+	font-family: $sans_serif;
+	line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+
+
+/* Block styles */
+
+.nav {
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.content {
+	padding: 0 20px;
+	text-align: center;
+}
+
+
+
+/* Inline styles */
+
+.username {
+	font-size: 13px;
+	font-weight: $bold;
+}
+
+.logout {
+	font-size: 11px;
+	text-decoration: none;
+	color: lighten(#000, 60);
+	border-bottom: 1px dotted;
+
+	&:hover {
+		color: $primary_color;
+	}
+}
+
+.btn {
+	@include btn();
+}
+
+
+.btn--tw {
+	@include btn(#fff, $tw_blue);
+}
+
+.box-input {
+	@include fixed-input-height();
+	padding: 0 14px;
+}
+
+.tweet-count-select {
+	text-align: center;
+	font-weight: $bold;
+	font-size: 15px;
+
+	@media screen and (min-width: 600px) {
+		font-size: 20px;
+	}
+}
+
+.tweet-count {
+	display: inline-block;
+	color: #fff;
+	font-weight: $bold;
+	padding: 2px 8px;
+	background: $tw_blue;
+	border-radius: 2px;
+}
+
+[data-auto-dismiss] {
+	display: block;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	padding: 10px 12px;
+	font-size: 12px;
+	font-weight: $bold;
+	color: #fff;
+	background: rgba(0,0,0,0.4);
+	border-radius: 3px;
+}
+
+
+
+/* Helper classes */
+.hide {
+	display: none;
+}

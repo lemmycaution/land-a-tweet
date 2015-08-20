@@ -10,18 +10,21 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ * require_tree .
+ *= require iframestyles
+ *= require animate
  *= require_self
  */
 
+/*
 @import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800);
 
 .bg-blue-grad{
-  background: -webkit-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); /* W3C */
+  background: -webkit-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); // Chrome 10+, Saf5.1+
+  background:    -moz-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); // FF3.6+
+  background:     -ms-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); // IE10
+  background:      -o-linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); // Opera 11.10+
+  background:         linear-gradient(90deg, #00d2ff 10%, #3a7bd5 90%); // W3C
 }
 #error_explanation{
   background: red;
@@ -35,3 +38,4 @@ h1,h2,h3,h4,h5,h6
   font-family: 'Merriweather Sans', sans-serif;
   font-weight: 800 !important;
 }
+*/

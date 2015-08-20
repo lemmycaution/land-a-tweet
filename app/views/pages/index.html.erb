@@ -1,45 +1,50 @@
-<header class="white bg-blue bg-blue-grad">
+<header class="header">
   <% if current_user %>
-  <nav class="clearfix white">
-    <div class="sm-col">
-      <span class="inline-block p2"><%= current_user.payload['info']['name'].titleize %></span>
+  <nav class="nav">
+    <div>
+      <span class="username"><%= current_user.payload['info']['name'].titleize %></span>
     </div>
-    <div class="sm-col-right">
-      <a href="/auth/twitter" class="btn py2" data-method="delete">Logout</a>
+    <div>
+      <a class="logout" href="/auth/twitter" data-method="delete">Logout</a>
     </div>
   </nav>
   <% end %>
 
-  <div class="center px2 py4">
+  <div class="content">
     <% if !current_user %>
-    <h1 class="h1 h0-responsive caps mt4 mb2 regular">Lend a Tweet</h1>
-    <p class="h3 col-8 mx-auto">We would ask for tweet donations for a very specific campaign activity, 
+    <!-- <h1>Lend a Tweet</h1> -->
+    <p>We would ask for tweet donations for a very specific campaign activity, 
       people would lend us a selected number of tweets (they choose how many but default set to two) which we bank, 
       and when we have urgent messages to get out, we are able to cash-in the tweets and broadcast content from hundreds 
       of twitter accounts at once without having to place another request with the supporter.</p>
-    <a href="/auth/twitter" class="h4 btn btn-primary py2 px3 mb4 btn-login">Login with Twitter</a>
+    <a href="/auth/twitter" class="btn-login btn--tw"><i class="fa fa-twitter"></i>
+ Login with Twitter</a>
     <% else %>
-    <h1 class="h1 h0-responsive caps mt4 mb2 regular">Thank you for your help!</h1>
-    <div class="col-8 mx-auto">
-      <p class="h3">That's great to see you on board, you have currently <span class="bold inline-block px1 white bg-green rounded" data-donations><%= current_user.donations %></span> tweets donated, to change that put desired  number below and click `Donate!` button.</p>
+    <!-- <h1>Thank you for your help!</h1> -->
+    <div>
+      <p>That's great to see you on board, you have currently <span class="tweet-count" data-donations><%= current_user.donations %></span> tweets donated, to change that put desired  number below and click `Donate!` button.</p>
       <%= form_for current_user, url: donation_path(current_user.id), method: :put, remote: true, html: {class: "clearfix donations #{hide_class}" } do |f| %>
         <label class="hide">Tweet count</label>
-        <input name="donor[donations]" type="number" min="0" step="1" value="<%= current_user.donations %>" class="col col-6 md-col-9 field rounded-left x-group-item center" placeholder="Tweet count" data-donations>
+        <input class="box-input tweet-count-select" name="donor[donations]" type="number" min="0" step="1" value="<%= current_user.donations %>" placeholder="Tweet count" data-donations>
         <input type="hidden" name="donor[action]" value="<%= action_param %>">
-        <button type="submit" class="col col-6 md-col-3 btn btn-primary bg-green rounded-right">Donate!</button>
+        <button class="btn--tw box-input" type="submit"><i class="fa fa-twitter"></i>
+ Donate</button>
       <% end %>
-      <button class="<%= hide_class(true) %> btn btn-primary btn-toggle-donations-form">Change my preferences</button>
+      <button class="<%= hide_class(true) %> btn--tw btn-toggle-donations-form"><i class="fa fa-twitter"></i>
+ Change my preferences</button>
     </div>
     
     <% end %>
   </div>
 </header>
 
-<footer class="blue">
-  <div class="px2 py3 container center">
-    <a href="http://greenpeace.org" class="btn">Greenpeace</a>
-    <a href="http://www.greenpeace.org.uk/about/privacy-policy" class="btn">Privacy Policy</a>
-    <a href="http://www.greenpeace.org.uk/about/contact" class="btn">Contact</a>
-    <p class="h6 mt1">&copy; 2015 Greenpeace, UK</p>
+<!--
+<footer class="footer">
+  <div>
+    <a href="http://greenpeace.org">Greenpeace</a>
+    <a href="http://www.greenpeace.org.uk/about/privacy-policy">Privacy Policy</a>
+    <a href="http://www.greenpeace.org.uk/about/contact">Contact</a>
+    <p>&copy; 2015 Greenpeace, UK</p>
   </div>
 </footer>
+-->
