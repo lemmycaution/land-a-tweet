@@ -12,4 +12,7 @@ module ApplicationHelper
   def action_param
     sanitize params[:actionname].try(:gsub, /javascript\:|\(|\)|\;|\'/, '')
   end
+  def donation_value
+    current_user.donations > 0 ? current_user.donations : 2
+  end
 end
