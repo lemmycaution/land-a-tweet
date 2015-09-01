@@ -15,7 +15,7 @@
  *= require_self
  */
 
-@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,800);
+@import url(https://fonts.googleapis.com/css?family=Merriweather+Sans:400,800);
 
 #error_explanation{
   background: red;
