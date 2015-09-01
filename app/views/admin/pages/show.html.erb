@@ -1,0 +1,20 @@
+<div class="container p2">
+
+
+
+  <p>
+    <strong>Slug:</strong>
+    <%= @page.slug %>
+  </p>
+
+  <p>
+    <strong>Body:</strong>
+    <pre><%= @page.body %></pre>
+  </p>
+  
+
+  <%= link_to 'Edit', edit_page_path(@page), class: 'btn btn-outline' %>
+  <%= link_to 'Back', pages_path, class: 'btn btn-outline' %>  
+
+ 
+</div>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope 'admin', module: 'admin' do
     resources :donors
+    resources :pages    
     resources :tweets do
       get :broadcast, to: 'tweets#count_broadcast', on: :member
       post :broadcast, to: 'tweets#broadcast', on: :member
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, path: 'admin'
   get 'admin', to: 'admin/tweets#index', as: 'admin_root'
 
-  root 'pages#index'
+  root 'pages#show', slug: 'index'
 
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/auth/:provider', to: 'sessions#destroy'

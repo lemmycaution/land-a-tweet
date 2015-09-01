@@ -1,0 +1,36 @@
+<div class="container p2">
+
+  <h1>Listing Pages</h1>
+  <div class="overflow-scroll mb2">
+    <table class="table-light">
+      <thead>
+        <tr>
+          <th>Slug</th>
+          <th>Body</th>
+          <th>Status</th>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @pages.each do |page| %>
+        <tr>
+          <td><%= page.slug %></td>
+          <td><%= link_to 'Show', page %></td>
+          <td><%= link_to 'Edit', edit_page_path(page) %></td>
+          <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="border-top">Total <strong><%= Tweet.count %></strong></td>
+          <td class="border-top">Reached <strong><%= Tweet.reached %></strong></td>
+          <td class="border-top" colspan="4"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <%= link_to 'New Page', new_page_path, class: 'btn btn-primary' %>
+
+</div>
