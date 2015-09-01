@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   scope 'admin', module: 'admin' do
     resources :donors
-    resources :pages    
+    resources :pages
     resources :tweets do
       get :broadcast, to: 'tweets#count_broadcast', on: :member
       post :broadcast, to: 'tweets#broadcast', on: :member

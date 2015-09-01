@@ -22,13 +22,7 @@
         </tr>
         <% end %>
       </tbody>
-      <tfoot>
-        <tr>
-          <td class="border-top">Total <strong><%= Tweet.count %></strong></td>
-          <td class="border-top">Reached <strong><%= Tweet.reached %></strong></td>
-          <td class="border-top" colspan="4"></td>
-        </tr>
-      </tfoot>
+
     </table>
   </div>
   <%= link_to 'New Page', new_page_path, class: 'btn btn-primary' %>
