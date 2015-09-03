@@ -1,5 +1,6 @@
 class Donor < ActiveRecord::Base
-  # validates :donations, numericality: { only_integer: true, greater_than: 0 }, on: :update
+  validates :donations, numericality: { only_integer: true, less_than: 1000 }
+
   attr_accessor :action
   before_save :set_action
   after_update :update_tweet_statuses, if: 'donations > 0 && actions.try(:any?)'
@@ -73,4 +74,6 @@ class Donor < ActiveRecord::Base
       Tweet.sent_for_action(current_action).update_all(status: Tweet::PARTLY_SENT) if index < donations
     end
   end
+  
+
 end
