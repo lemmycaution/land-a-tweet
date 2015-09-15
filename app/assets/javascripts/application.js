@@ -62,8 +62,28 @@ $(document).on('page:change', function() {
   
   window.addEventListener("load", function (event)
   {
-    window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "http://staging.savethearctic.org/en-GB/gpuk-template-2/?stage=tweetPrefs")
-    window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "https://www.savethearctic.org")
+    // window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "http://staging.savethearctic.org")
+    // window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "https://www.savethearctic.org")
+    window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "http://fiddle.jshell.net")    
+  }, false)
+  window.addEventListener("message", function (event)
+  {
+    if(event.origin !== "http://staging.savethearctic.org" || event.origin !== "https://www.savethearctic.org" || event.origin !== "http://fiddle.jshell.net")
+      console.log(event.data)
+      switch(event.data[0]){
+      case "login":
+        $('.btn-login').click()
+        break;
+      case "logout":
+        $('a.logout').click()
+        break;
+      case "setDonation":
+        $('[name="donor[donations]"]').val(event.data[1])
+        break;
+      case "updateDonation":
+        $('form.donations button[type=submit]').click()
+        break;
+      }
   }, false)
   
 })
