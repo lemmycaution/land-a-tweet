@@ -59,18 +59,16 @@ $(document).on('page:change', function() {
       window.open(e.currentTarget.getAttribute('href'), '_blank')
     })
   }
-  
-  window.addEventListener("load", function (event)
-  {
-    // window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "http://staging.savethearctic.org")
-    // window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "https://www.savethearctic.org")
-    window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "http://fiddle.jshell.net")    
-  }, false)
+  function postMessageToParents(msg){
+    var domains = ["http://staging.savethearctic.org", "https://www.savethearctic.org", "http://fiddle.jshell.net"]
+    for (var i in domains) 
+      window.parent.postMessage(msg, domains[i])
+  }
   window.addEventListener("message", function (event)
   {
     if(event.origin !== "http://staging.savethearctic.org" || event.origin !== "https://www.savethearctic.org" || event.origin !== "http://fiddle.jshell.net")
       console.log(event.data)
-      switch(event.data[0]){
+      switch (event.data[0]) {
       case "login":
         $('.btn-login').click()
         break;
@@ -80,6 +78,12 @@ $(document).on('page:change', function() {
       case "updateDonation":
         $('[name="donor[donations]"]').val(event.data[1])
         $('form.donations button[type=submit]').click()
+        break;
+      case "callSetDonation":
+        postMessageToParents(['setDonation', $('[name="donor[donations]"]').val()])
+        break;
+      case "callSetHeight":
+        postMessageToParents(['setHeight', document.getElementsByTagName("html")[0].scrollHeight])
         break;
       }
   }, false)
