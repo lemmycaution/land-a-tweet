@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lend a Tweet</title>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if flash[:alert] %><p class="m2 p2 white bg-darken-3 rounded fixed right-0 center z2" data-auto-dismiss="5"><%= flash[:alert] %></p><% end %>
+<% if flash[:notice] %><p class="m2 p2 white bg-darken-3 rounded fixed right-0 center z2" data-auto-dismiss="5"><%= flash[:notice] %></p><% end %>
+
+<% if current_admin_user %>
+<nav class="clearfix white bg-green">
+  <div class="sm-col">
+    <a href="/admin/pages" class="btn py2">Pages</a>    
+    <a href="/admin/donors" class="btn py2">Donors</a>
+    <a href="/admin/tweets" class="btn py2">Tweets</a>
+    <a href="/admin/panic" class="btn py2">Panic</a>
+  </div>
+  <div class="sm-col-right">
+    <%= link_to 'Sign out', destroy_admin_user_session_path, method: :delete, class: 'btn py2' %>
+  </div>
+</nav>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

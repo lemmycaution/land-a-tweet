@@ -1,5 +1,5 @@
 class Donor < ActiveRecord::Base
-  validates :donations, numericality: { only_integer: true, less_than: 1000 }
+  validates :donations, numericality: { only_integer: true, less_than: 100 }
 
   attr_accessor :action
   before_save :set_action
