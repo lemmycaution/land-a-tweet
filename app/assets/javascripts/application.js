@@ -77,10 +77,8 @@ $(document).on('page:change', function() {
       case "logout":
         $('a.logout').click()
         break;
-      case "setDonation":
-        $('[name="donor[donations]"]').val(event.data[1])
-        break;
       case "updateDonation":
+        $('[name="donor[donations]"]').val(event.data[1])
         $('form.donations button[type=submit]').click()
         break;
       }
