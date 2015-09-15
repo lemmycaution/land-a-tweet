@@ -60,4 +60,10 @@ $(document).on('page:change', function() {
     })
   }
   
+  window.addEventListener("load", function (event)
+  {
+    window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "http://staging.savethearctic.org/en-GB/gpuk-template-2/?stage=tweetPrefs")
+    window.parent.postMessage(document.getElementsByTagName("html")[0].scrollHeight, "https://www.savethearctic.org")
+  }, false)
+  
 })
