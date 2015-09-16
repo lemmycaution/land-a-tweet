@@ -18,9 +18,24 @@
   <%= f.text_area :body, class: 'block col-12 mb2 field' %>
   
   <%= f.label :domains %>
-  <%= f.text_field :domains, name: 'page[domains][]', class: 'block col-12 mb2 field' %>
+  <div id="page_domains">
+    <% @page.domains.each do |domain| %>
+    <div class="input-group">
+      <input name="page[domains][]" class="inline-block col-11 mb2 field" type="text" value="<%= domain %>" >
+      <a class="btn btn-outline inline-block mb2 remove-domain">-</a>
+    </div>
+    <% end %>
+  </div>
+  <a class="btn btn-outline mb2 add-domain">Add domain</a>
+  
 
   <div class="actions">
     <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
+<script id="tmp-page-domains-input-group-clone" type="x-tmp-text">
+<div class="input-group">
+  <input name="page[domains][]" class="inline-block col-11 mb2 field" type="text" value="">
+  <a class="btn btn-outline inline-block mb2 remove-domain">-</a>
+</div>
+</script>

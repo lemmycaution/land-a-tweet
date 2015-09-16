@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies[:user] = nil
-    redirect_to root_path, notice: "Signed out!"
+    redirect_to (request.referer || root_url), notice: "Signed out!"
   end
   
   def failure
