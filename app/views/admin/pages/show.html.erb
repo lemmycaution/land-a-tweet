@@ -12,6 +12,11 @@
     <pre><%= @page.body %></pre>
   </p>
   
+  <p>
+    <strong>Domains:</strong>
+    <%= @page.domains %>
+  </p>
+  
 
   <%= link_to 'Edit', edit_page_path(@page), class: 'btn btn-outline' %>
   <%= link_to 'Back', pages_path, class: 'btn btn-outline' %>  

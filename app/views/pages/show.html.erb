@@ -1,1 +1,7 @@
 <% render_page @page %>
+<% if @page.domains.any? %>
+<script>
+PostMessageAPI.init(<%== @page.domains.to_json %>)
+PostMessageAPI.instance.callGetLoggedIn()
+</script>
+<% end %>
