@@ -3,6 +3,7 @@ class Donor < ActiveRecord::Base
 
   attr_accessor :action
   before_save :set_action
+  before_create :set_donations_default
   after_update :update_tweet_statuses, if: 'donations > 0 && actions.try(:any?)'
   
   def self.find_or_create_by_oauth auth_hash
@@ -67,6 +68,10 @@ class Donor < ActiveRecord::Base
   
   def set_action
     payload['actions'] << action if action && !actions.include?(action)
+  end
+  
+  def set_donations_default
+    self.donations = 1 if self.donations == 0
   end
   
   def update_tweet_statuses
