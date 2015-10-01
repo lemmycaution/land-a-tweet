@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
 
   def create
     cookies[:user] = Donor.find_or_create_by_oauth(request.env['omniauth.auth']).id
-    render inline: "<script>window.close()</script>"
+    # render inline: "<script>window.close()</script>"
+    redirect_to root_url(close: true)
   end
 
   def destroy
