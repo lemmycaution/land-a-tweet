@@ -43,7 +43,7 @@ class Donor < ActiveRecord::Base
   end
   
   def name
-    payload['info']['name']
+    payload.try(:[],'info').try(:[],'name')
   end
   def donations
     payload['donations'].to_i
