@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header p2">
   <% if current_user %>
   <nav class="nav">
     <div>
@@ -12,7 +12,6 @@
 
   <div class="content">
     <% if !current_user %>
-    <!-- <h1>Lend a Tweet</h1> -->
     <p>We would ask for tweet donations for a very specific campaign activity, 
       people would lend us a selected number of tweets (they choose how many but default set to two) which we bank, 
       and when we have urgent messages to get out, we are able to cash-in the tweets and broadcast content from hundreds 
@@ -20,7 +19,6 @@
     <a href="/auth/twitter" class="btn-login btn--tw"><i class="fa fa-twitter"></i>
  Login with Twitter</a>
     <% else %>
-    <!-- <h1>Thank you for your help!</h1> -->
     <div>
       <p>That's great to see you on board, you have currently <span class="tweet-count" data-donations><%= current_user.donations %></span> tweets donated, to change that put desired  number below and click `Lend` button.</p>
       <%= form_for current_user, url: donation_path(current_user.id), method: :put, remote: true, html: {class: "clearfix donations #{hide_class}" } do |f| %>
@@ -37,14 +35,3 @@
     <% end %>
   </div>
 </header>
-
-<!--
-<footer class="footer">
-  <div>
-    <a href="http://greenpeace.org">Greenpeace</a>
-    <a href="http://www.greenpeace.org.uk/about/privacy-policy">Privacy Policy</a>
-    <a href="http://www.greenpeace.org.uk/about/contact">Contact</a>
-    <p>&copy; 2015 Greenpeace, UK</p>
-  </div>
-</footer>
--->

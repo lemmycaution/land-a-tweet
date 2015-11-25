@@ -10,9 +10,14 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require ./application
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require ./auto_dismiss
 
 $(document).on('page:change', function() {
+  AutoDismiss.init()
+
   function updateCounts () {
     var $submitBtn = $('form.broadcast input[type=submit]')
     $submitBtn.attr('disabled', true)
@@ -29,4 +34,15 @@ $(document).on('page:change', function() {
     $('#broadcast_limit, #broadcast_donor_ids, #broadcast_donations_greater_than').change(updateCounts)
     updateCounts()
   }
+  function addDomain () {
+    var clone = $($("#tmp-page-domains-input-group-clone").html())
+    clone.find('input').val('')
+    clone.find('.remove-domain').click(removeDomain)
+    $("#page_domains").append(clone)
+  }
+  function removeDomain (e) {
+    $(e.target).parents('.input-group').remove() 
+  }
+  $('.add-domain').click(addDomain)
+  $('.remove-domain').click(removeDomain)
 })

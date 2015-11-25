@@ -27,7 +27,7 @@ $button_height: 48px;
 
 	@media screen and (min-width: 600px) {
 		display: inline-block;
-		width: auto;
+		//width: auto;
 		height: $button_height;
 		font-size: $doc_font_size;
 		line-height: $button_height;

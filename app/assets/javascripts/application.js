@@ -13,25 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-// =require post_message_api
+//= require ./auto_dismiss
 
 $(document).on('page:change', function() {
 
-  var $loginLink = $('.btn-login')
-  
   function toggleForm() {
     $(this).toggleClass('hide')
     $('form.donations').toggleClass('hide')
   }
 
-  $('[data-auto-dismiss]').each(function (i, el) {
-    var $el = $(el)
-    setTimeout(function () { 
-      $el.addClass('animated fadeOutUp') 
-      $el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () { $el.remove() });
-    }, parseInt($el.data('auto-dismiss')) * 1000)
-  })
-  
   $('form[data-remote=true]')
   .on('ajax:before', function(e, data, status, xhr) {
     $(e.currentTarget).parent().find('.errors').remove()
@@ -48,20 +38,8 @@ $(document).on('page:change', function() {
     errors += '</ul>'
     $(errors).insertBefore($(e.currentTarget))
   })
+
   $('.btn-toggle-donations-form').click(toggleForm)
 
-
-  if ($loginLink.length > 0) {
-    $loginLink.click(function (e) {
-      e.preventDefault()
-      var checkInt = setInterval(function () {
-        $.get('/auth/check').then(function () {
-          clearInterval(checkInt)
-          window.location.reload()
-        })
-      },1000)
-      window.open(e.currentTarget.getAttribute('href'), '_blank')
-    })
-  }
-  
+  AutoDismiss.init()
 })

@@ -8,7 +8,7 @@
           <th>Name</th>
           <th>Donations</th>
           <th>Donations Used</th>
-          <th colspan="2"></th>
+          <th colspan="3"></th>
         </tr>
       </thead>
 
@@ -30,7 +30,7 @@
           <td class="border-top">Donors <strong><%= Donor.count %></strong></td>
           <td class="border-top">Donors with available donations <strong><%= Donor.has_donation_equal_or_greater_than(1).count %></strong></td>
           <td class="border-top">Available Donations <strong><%= Donor.available_donations_count %></strong></td>          
-          <td class='border-top' colspan="2"></td>
+          <td class='border-top' colspan="3"></td>
         </tr>
       </tfoot>
     </table>

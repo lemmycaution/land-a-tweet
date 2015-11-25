@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, path: 'admin'
   get 'admin', to: 'admin/tweets#index', as: 'admin_root'
 
+  get 'pages/:slug', to: 'pages#show', as: 'public_page' #FIX: fix this cause admin gets page route
+  get 'jsapi', to: 'pages#jsapi', format: 'js'
   root 'pages#show', slug: 'index'
 
   get '/auth/:provider/callback', to: 'sessions#create'
