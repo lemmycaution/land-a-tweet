@@ -10,6 +10,7 @@ Refile.host = {
 }[Rails.env]
 
 if Rails.env.production?
+
   require "refile/s3"
 
   aws = {
