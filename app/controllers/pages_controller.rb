@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 
   before_action :find_page, only: :show
   before_action :allow_iframe, only: :show, if: '@page.try(:embeddable?)'
+  helper_method :jsapi_referer, :jsapi_origin
 
   def show
     if params[:id]
@@ -11,10 +12,6 @@ class PagesController < ApplicationController
     redirect_to "/404" and return if @page.nil? and @fallback.nil?
     render layout: @page.try(:embeddable?) ? 'embed' : 'application'
   end
-  
-  def jsapi
-    render layout: false, content_type: "application/javascript"
-  end
 
   private
 
@@ -23,6 +20,10 @@ class PagesController < ApplicationController
   end
 
   def allow_iframe
+    referer = request.referer.match(/((http|https):\/\/[\d|\w|\:]*)/).try(:[],0)
+    puts "REFERER: #{referer}"
+    # response.headers['X-Content-Security-Policy'] = "frame-options #{referer}"    
     response.headers.except! 'X-Frame-Options'
   end
+
 end

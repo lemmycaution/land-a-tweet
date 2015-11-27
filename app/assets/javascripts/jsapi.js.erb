@@ -1,22 +1,30 @@
 window.LAT = (function () { 
-  var origin = document.createElement("a")
+  var origin = '<%= ActionController::Base.asset_host %>'
   var frame
   var callbacks = {}
 
-  function LAT () {
-    origin.href = '<%= request.referer %>'
-    origin = '<%= request.protocol + request.host + (request.port != 80 ? ":#{request.port}" : nil).to_s %>' //origin.protocol + '//' + origin.host
-    frame = document.getElementById('lat-frame')
-    if (!frame) {
+  function LAT (options) {
+    options = options || {}
+    if (options.frame) {
+      frame = options.frame
+    } else {
       frame = document.body.appendChild(document.createElement('IFRAME')) 
-      frame.src = '<%= public_page_url(slug: "embed-login") %>'
+      frame.src = options.src
+    }
+    if (!options.skipStyles) {
       frame.style.width = "100%"
-      frame.style.height = "48px" 
+      this.addEventListener('ready', function () {
+        this.api({method: 'getHeight', callback: function (height) {
+          console.log(height)
+          frame.style.height = height + 'px'
+        }})
+      }.bind(this))
       frame.setAttribute('scrolling', 'no')
       frame.setAttribute('frameborder', 'no')
     }
     window.addEventListener("message", this.onMessage.bind(this))
   }
+
   LAT.prototype.onMessage = function (event) {
     if (event.origin !== origin) return
     var action = event.data
@@ -27,17 +35,20 @@ window.LAT = (function () {
       delete callbacks[action.method]
     }
   }
+
   LAT.prototype.addEventListener = function () {
     frame.addEventListener.apply(frame, arguments)
   }
+
   LAT.prototype.removeEventListener = function () {
     frame.removeEventListener.apply(frame, arguments)
   }
+
   LAT.prototype.api = function (params) {
     callbacks[params.method] = params.callback
     delete params.callback
     frame.contentWindow.postMessage(params, origin)
   }
-  
+
   return LAT
 })()

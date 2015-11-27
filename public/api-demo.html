@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lend a Tweet | Api Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+
+  <iframe src="http://localhost:5000/pages/embed-login" style="display:none"></iframe>
+  <!-- external interfaces can use api as well note: js login api doesn't work on safari so stick with the iframe -->
+
+  <br/>
+
+  <a class="login" style="display:none">login</a>
+
+  <form style="display:none">
+      <label class="user"></label>
+      <input id="donations" placeholder="donations" />
+      <input id="action" placeholder="action" />
+      <input type="submit" value="lend" />
+      <br/> <a class="logout">logout</a>
+  </form>
+
+  <script src='http://localhost:5000/assets/jsapi.js'></script>
+  <script>
+
+  var frame = document.querySelector('iframe')
+  var lat = new LAT({
+      frame: frame,
+      // skipStyles: true,
+      // src:'http://localhost:5000/pages/embed-login'
+  })
+  var form = document.querySelector('form')
+  var donations = document.querySelector('#donations')
+  var action = document.querySelector('#action')
+  var login = document.querySelector('.login')
+  var logout = document.querySelector('.logout')
+  var label = document.querySelector('.user')
+  var user
+  login.addEventListener('click', function (e) {
+      e.preventDefault()
+      lat.api({
+          method: 'login'
+      })
+  })
+  logout.addEventListener('click', function (e) {
+      e.preventDefault()
+      lat.api({
+          method: 'logout',
+      })
+  })
+  form.addEventListener('submit', function (e) {
+      e.preventDefault()
+      lat.api({
+          method: 'updateDonation',
+          data: {
+              donations: donations.value,
+              action: action.value
+          },
+          callback: function (resp) {
+              if (resp.status === 200) {
+                  user.donations = resp.responseJSON
+                  label.innerText = user.name + ', donations: ' + user.donations
+              } else {
+                  alert('opst, something went wrong')
+              }
+          }
+      })
+  })
+
+  lat.addEventListener('ready', function () {
+      console.log('ready')
+      frame.style.display = 'block'
+      lat.api({
+          method: 'getLoggedIn',
+          callback: function (resp) {
+              user = resp
+              if (user) {
+                  label.innerText = user.name + ', donations: ' + user.donations
+                  donations.value = user.donations
+                  action.value = user.actions[user.actions.length - 1]
+                  // since user has donations data
+                  // we don't need to call getDonation
+                  //lat.api({
+                  //    method: 'getDonation',
+                  //    callback: function (donation) {
+                  //        donations.value = donation
+                  //    }
+                  //})
+                  form.style.display = 'block'
+                  login.style.display = 'none'
+              } else {
+                  login.style.display = 'block'
+                  form.style.display = 'none'
+              }
+          }
+      })
+  })
+  </script>
+
+</body>
+</html>

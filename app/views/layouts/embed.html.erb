@@ -3,22 +3,23 @@
 <head>
   <title>Lend a Tweet</title>
   <%= stylesheet_link_tag    'embed', media: 'all', 'data-turbolinks-track' => true %>
-  <% if current_user %>
-  <script>
-  var embedData = {
-    currentUser: <%== current_user.to_json(only: [], methods: [:name, :donations, :actions]) %>,
-    donationUpdateUrl: '<%= donation_path(current_user.id) %>'
-  }
-  </script>
-  <% else %>  
-  <script>
-  var embedData = null
-  </script>  
-  <% end %>
   <%= javascript_include_tag 'embed', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= yield %>
+<%= yield %>  
+<script>
+PostMessageAPI.init(
+  <%== @page.domains.to_json %>, 
+  <% if current_user %>
+  {
+    currentUser: <%== current_user.to_json(only: [], methods: [:name, :donations, :actions]) %>,
+    donationUpdateUrl: '<%= donation_path(current_user.id) %>'
+  }
+  <% else %>
+  null
+  <% end %>
+)
+</script>
 </body>
 </html>

@@ -5,4 +5,5 @@ module PagesHelper
     body = page ? page.body : @fallback
     ERB.erb_implementation.new(body).result(binding).html_safe
   end
+
 end

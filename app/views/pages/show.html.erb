@@ -1,8 +1,2 @@
 <% render_page @page %>
-<% if @page.try(:embeddable?) %>
-<script>
-PostMessageAPI.init(<%== @page.domains.to_json %>)
-PostMessageAPI.instance.getLoggedIn()
-</script>
-<% end %>
 <% if params[:close]%><script>window.close()</script><% end %>

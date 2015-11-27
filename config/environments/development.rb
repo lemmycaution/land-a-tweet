@@ -39,4 +39,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
    config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
+   
+  # Set asset host as localhost:5000 to write origin host in jsapi.js.erb 
+  config.action_controller.asset_host = 'http://localhost:5000'
 end
