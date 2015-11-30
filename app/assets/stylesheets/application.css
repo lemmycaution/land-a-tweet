@@ -14,3 +14,7 @@
  *= require animate
  *= require_self
  */
+
+.bg-dark-green{background-color:#265812}
+.bg-light-blue{background-color:#378FF4}
+.x-group-item{margin-right: -0.250rem}

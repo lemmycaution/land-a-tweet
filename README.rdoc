@@ -1,3 +1,11 @@
 # Lend A Tweet
 
 Open source RoR application for collecting Tweet donations and broadcasting tweets through donors, which powers https://www.lendatweet.org
+
+# ToDo
+
+- Write a proper README & documentation
+- Move from dj to sidekiq
+- General optimisations
+- Code cleanup
+
